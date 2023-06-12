@@ -32,6 +32,7 @@ namespace WpfAppApiDb
             InitializeComponent();
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri("https://localhost:7215");
+            httpClient.DefaultRequestHeaders.Add("login", "Ivan");
         }
 
         void UpdateDatagrid()

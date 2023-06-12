@@ -21,15 +21,31 @@ namespace WebApplicationAPIDemo.Controllers
             _context = context;
         }
 
+        bool CheckUser()
+        {
+            var username = Request.Headers["login"];
+            var password = Request.Headers["password"];
+            if (username == "Ivan" &&  password =="1111")
+                return true;
+            else
+                return false;
+        }
+
         // GET: api/Students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-          if (_context.Students == null)
-          {
-              return NotFound();
-          }
-            return await _context.Students.ToListAsync();
+            
+
+            if (CheckUser())
+            {
+                if (_context.Students == null)
+                {
+                    return NotFound();
+                }
+                return await _context.Students.ToListAsync();
+            }
+            return Unauthorized();
         }
 
         // GET: api/Students/5
