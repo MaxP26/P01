@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using WebApplicationMVCDemo.Data;
 using WebApplicationMVCDemo.Models;
 
 namespace WebApplicationMVCDemo.Controllers
@@ -7,15 +9,20 @@ namespace WebApplicationMVCDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            ViewData["TextFromController"] = "hgdshds sddsfsd fdgfsdf";
+            var students =  await _context.Students.ToArrayAsync();
+            var model = new IndexViewModel { Students=students};
+            return View(model);
         }
 
         public IActionResult Privacy()
