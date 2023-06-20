@@ -20,15 +20,32 @@ namespace WebApplicationMVCDemo.Controllers
         }
 
         // GET: StudentGroups
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchName,string searchDirection)
         {
-              return _context.StudentGroup != null ? 
-                          View(await _context.StudentGroup.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.StudentGroup'  is null.");
+            if (_context.StudentGroup == null)
+                return Problem("Entity set 'ApplicationDbContext.StudentGroup'  is null.");
+            var result = _context.StudentGroup.AsQueryable();
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                switch (searchDirection)
+                {
+                    case "Contains":
+                        result = result.Where(s => s.Name.Contains(searchName));
+                        break;
+                    case "StartWith":
+                        result = result.Where(s => s.Name.StartsWith(searchName));
+                        break;
+                    case "EndWith":
+                        result = result.Where(s => s.Name.EndsWith(searchName));
+                        break;
+
+                }
+            }
+            return  View(await result.ToListAsync());
         }
 
         // GET: StudentGroups/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id,string searchName,string searchSurname,bool caseInsensetiv,SearchDirection direction)
         {
             if (id == null || _context.StudentGroup == null)
             {
@@ -40,6 +57,16 @@ namespace WebApplicationMVCDemo.Controllers
             if (studentGroup == null)
             {
                 return NotFound();
+            }
+
+            var students = _context.Students.Where(s => s.StudentGroupId == studentGroup.Id);
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                students.Where(s=>s.Name.Contains(searchName));
+            }
+            if (!string.IsNullOrEmpty(searchSurname))
+            {
+                students.Where(s => s.Name.Contains(searchSurname));
             }
 
             return View(studentGroup);
