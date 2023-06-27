@@ -38,4 +38,10 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.Use(async (context, next) => {
+    //await context.Response.WriteAsync("My error");
+    var r = context.Request;
+    await next();
+});
+
 app.Run();

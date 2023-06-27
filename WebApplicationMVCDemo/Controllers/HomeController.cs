@@ -22,6 +22,7 @@ namespace WebApplicationMVCDemo.Controllers
             ViewData["TextFromController"] = "hgdshds sddsfsd fdgfsdf";
             var students =  await _context.Students.ToArrayAsync();
             var model = new IndexViewModel { Students=students};
+            _logger.LogInformation("sfsdgdshhds");
             return View(model);
         }
 

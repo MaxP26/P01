@@ -15,7 +15,7 @@ namespace WebApplicationDemo.Pages.StudentGroups
     {
         private readonly ApplicationDbContext _context;
 
-        public EditModel(ApplicationDbContext context)
+        public StudentEditModel(ApplicationDbContext context)
         {
             _context = context;
         }
