@@ -3,31 +3,29 @@
 
 @{
     ViewData["Title"] = "Index";
+    var sl = new List<SelectListItem>();
+    sl.Add(new SelectListItem { Text = "StartWith" });
+    sl.Add(new SelectListItem { Text = "EndWith" });
+    sl.Add(new SelectListItem { Text = "Contains" });
+
 }
 
-<h1>Index</h1>
+<div class="row justify-content-between">
+    <div class="col-12 col-md-2">
+        <a asp-page="Create" class="btn btn-primary"><span class="bi bi-alarm"></span></a>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-end">
+        <form asp-page-handler="Filter">    
+       
+            @Html.DropDownList("searchDirection",sl,"Напрямок пошуку:")
+                     Назва: @Html.TextBox("SearchName")
+                     <input type="submit" value="Фільтрувати" class="btn btn-primary"/>
+        </form>
+    
+    </div>
+</div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<form asp-page-handler="Filter">
-    <p>
-
-        @{
-
-            var sl = new List<SelectListItem>();
-            sl.Add(new SelectListItem { Text = "StartWith" });
-            sl.Add(new SelectListItem { Text = "EndWith" });
-            sl.Add(new SelectListItem { Text = "Contains" });
-
-        }
-        Напрямок пошуку: @Html.DropDownList("searchDirection",sl))
-        Назва: @Html.TextBox("SearchName") <input type="submit" value="Фільтрувати" />
-    </p>
-</form>
-
-
-<table class="table">
+<table class="table table-color">
     <thead>
         <tr>
             <th>
