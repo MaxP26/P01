@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppBlazorWasm.Shared"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppApiTest", "ConsoleAppApiTest\ConsoleAppApiTest.csproj", "{BE968A96-2174-4B81-B818-780D63F0CB02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppApiDb", "WpfAppApiDb\WpfAppApiDb.csproj", "{A3071F92-65E4-4BF6-8B80-822B6DA7AEC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppApiDb", "WpfAppApiDb\WpfAppApiDb.csproj", "{A3071F92-65E4-4BF6-8B80-822B6DA7AEC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
